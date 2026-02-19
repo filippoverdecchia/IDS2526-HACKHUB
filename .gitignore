@@ -1,0 +1,10 @@
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Java build (se in futuro)
+target/
+build/
+*.log
