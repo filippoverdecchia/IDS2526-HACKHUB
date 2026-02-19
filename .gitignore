@@ -8,3 +8,6 @@ Thumbs.db
 target/
 build/
 *.log
+
+# Visual Paradigm backup files
+*.vpp.bak*
