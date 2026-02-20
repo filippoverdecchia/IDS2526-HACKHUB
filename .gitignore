@@ -11,3 +11,5 @@ build/
 
 # Visual Paradigm backup files
 *.vpp.bak*
+*.vbak
+*.vpp.vbak*
