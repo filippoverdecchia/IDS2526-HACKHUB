@@ -13,3 +13,4 @@ build/
 *.vpp.bak*
 *.vbak
 *.vpp.vbak*
+*.lck
