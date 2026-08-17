@@ -1,21 +1,35 @@
 package it.unicam.hackhub.domain.hackathon;
 
+import it.unicam.hackhub.domain.sottomissione.Sottomissione;
+import it.unicam.hackhub.domain.sottomissione.Valutazione;
+import it.unicam.hackhub.domain.team.Team;
+
 /**
  * Ruolo "State" del pattern State (GoF).
- * Ogni stato concreto incapsula CIO' CHE E' PERMESSO nella sua fase:
- * grazie a questa interfaccia, nel resto del progetto non serve
- * nessun if/switch sulla fase dell'hackathon.
  *
- * L'interfaccia CRESCE con i casi d'uso dell'Iterazione 1:
- *  - ora: sola transizione di fase;
- *  - con Team: iscriviTeam(...) permessa solo in IN_ISCRIZIONE;
- *  - con Sottomissione: aggiungiSottomissione(...) solo in IN_CORSO;
- *  - con Valutazione: valutaSottomissione(...) solo in IN_VALUTAZIONE.
+ * Ogni stato concreto incapsula CIO' CHE E' PERMESSO nella sua fase: grazie a
+ * questa interfaccia, nel resto del progetto non serve nessun if o switch
+ * sulla fase dell'hackathon.
+ *
+ * Corrispondenza tra fase e operazione consentita:
+ *   IN_ISCRIZIONE  -> iscriviTeam
+ *   IN_CORSO       -> aggiungiSottomissione
+ *   IN_VALUTAZIONE -> valutaSottomissione
+ *   CONCLUSO       -> nessuna
  */
 public interface HackathonState {
 
-    /** Porta l'hackathon alla fase successiva, se la transizione e' consentita. */
+    /** Porta l'hackathon alla fase successiva, se consentito. */
     void passaAlProssimoStato();
+
+    /** Iscrive un team all'hackathon. Consentito solo in fase di iscrizione. */
+    void iscriviTeam(Team team);
+
+    /** Registra la sottomissione di un team. Consentito solo a hackathon in corso. */
+    void aggiungiSottomissione(Team team, Sottomissione sottomissione);
+
+    /** Assegna una valutazione alla sottomissione di un team. Consentito solo in valutazione. */
+    void valutaSottomissione(Team team, Valutazione valutazione);
 
     /** Tipo enumerato corrispondente a questo stato. */
     HackathonStateType tipo();
