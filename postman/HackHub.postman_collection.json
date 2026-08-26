@@ -1,0 +1,175 @@
+{
+  "info": {
+    "_postman_id": "0971bd35-f3e7-407b-a4d6-63d9738cdf20",
+    "name": "HackHub",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45450367"
+  },
+  "item": [
+    {
+      "name": "1 - Crea hackathon",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nome\": \"AI Challenge 2026\",\r\n  \"regolamento\": \"Regolamento ufficiale v1\",\r\n  \"scadenzaIscrizioni\": \"2026-09-05\",\r\n  \"dataInizio\": \"2026-09-10\",\r\n  \"dataFine\": \"2026-09-12\",\r\n  \"luogo\": \"Camerino\",\r\n  \"premio\": 1000,\r\n  \"dimensioneMaxTeam\": 4,\r\n  \"idOrganizzatore\": \"6f093751-0f82-4354-bc5f-354265dbf171\",\r\n  \"idGiudice\": \"09788c73-d4cb-40c4-baae-410fdfc88143\",\r\n  \"idMentori\": [\"e8c4bb70-2a8c-4753-ac30-b4c8ef678ebd\"]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/hackathons",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "hackathons"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2 - Crea Team",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nome\": \"I Byte Perduti\",\r\n  \"idCreatore\": \"1634a09b-d65f-49fa-b25d-4b34d39aa80a\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/team",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "team"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3 - Iscrivi team",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/hackathons/848984fe-ea7a-4726-a44a-b89a338fb228/team/4e774eb9-f305-4c8c-ac55-ba644ae3c6b5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "hackathons",
+            "848984fe-ea7a-4726-a44a-b89a338fb228",
+            "team",
+            "4e774eb9-f305-4c8c-ac55-ba644ae3c6b5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4 - Sottomissione fuori fase",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"idTeam\": \"4e774eb9-f305-4c8c-ac55-ba644ae3c6b5\",\r\n  \"titolo\": \"Prova anticipata\",\r\n  \"contenuto\": \"Test\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/hackathons/848984fe-ea7a-4726-a44a-b89a338fb228/sottomissioni",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "hackathons",
+            "848984fe-ea7a-4726-a44a-b89a338fb228",
+            "sottomissioni"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5 - Avanza fase",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/hackathons/848984fe-ea7a-4726-a44a-b89a338fb228/avanza",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "hackathons",
+            "848984fe-ea7a-4726-a44a-b89a338fb228",
+            "avanza"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6 - Valuta sottomissione",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"idTeam\": \"4e774eb9-f305-4c8c-ac55-ba644ae3c6b5\",\r\n  \"idGiudice\": \"09788c73-d4cb-40c4-baae-410fdfc88143\",\r\n  \"giudizio\": \"Progetto ben strutturato e funzionante\",\r\n  \"punteggio\": 9\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/hackathons/848984fe-ea7a-4726-a44a-b89a338fb228/valutazioni",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "hackathons",
+            "848984fe-ea7a-4726-a44a-b89a338fb228",
+            "valutazioni"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
