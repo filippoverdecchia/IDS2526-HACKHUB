@@ -14,3 +14,5 @@ build/
 *.vbak
 *.vpp.vbak*
 *.lck
+*.class
+*.iml
