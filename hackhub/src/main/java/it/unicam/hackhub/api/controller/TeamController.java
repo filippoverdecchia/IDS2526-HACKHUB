@@ -9,9 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
-/** Punto di ingresso REST per i team. */
+/**
+ * Punto di ingresso REST per i team.
+ *
+ * I membri non si aggiungono da qui: entrano nel team accettando un
+ * invito (vedi InvitoController).
+ */
 @RestController
 @RequestMapping("/api/team")
 public class TeamController {
@@ -24,14 +27,8 @@ public class TeamController {
 
     /** Caso d'uso "Crea team". */
     @PostMapping
-    public ResponseEntity<TeamResponse> crea(@Valid @RequestBody CreaTeamRequest richiesta) {
+    public ResponseEntity<TeamResponse> creaTeam(@Valid @RequestBody CreaTeamRequest richiesta) {
         Team creato = teamService.crea(richiesta.nome(), richiesta.idCreatore());
         return ResponseEntity.status(HttpStatus.CREATED).body(TeamResponse.da(creato));
-    }
-
-    /** Aggiunge un membro a un team esistente. */
-    @PostMapping("/{id}/membri/{idUtente}")
-    public TeamResponse aggiungiMembro(@PathVariable UUID id, @PathVariable UUID idUtente) {
-        return TeamResponse.da(teamService.aggiungiMembro(id, idUtente));
     }
 }

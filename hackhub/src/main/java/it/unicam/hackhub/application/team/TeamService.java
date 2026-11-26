@@ -15,6 +15,10 @@ import java.util.UUID;
  * non puo' essere aggiunto due volte, il nome e' obbligatorio) sono nella
  * classe Team, che possiede le informazioni per applicarle.
  *
+ * I nuovi membri entrano nel team solo accettando un invito
+ * (vedi InvitoService): non esiste un'operazione per aggiungerli
+ * direttamente.
+ *
  * Nessuna annotazione di framework: la classe e' Java puro e viene
  * registrata come componente Spring da una configurazione esterna.
  */
@@ -32,7 +36,8 @@ public class TeamService {
      * Crea un team con il nome indicato, di cui l'utente creatore diventa
      * il primo membro.
      *
-     * @throws IllegalArgumentException se il creatore non esiste
+     * @throws IllegalArgumentException se il creatore non esiste,
+     *                                  se appartiene gia' a un team
      *                                  o se il nome e' gia' in uso
      */
     public Team crea(String nome, UUID idCreatore) {
@@ -40,29 +45,17 @@ public class TeamService {
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Utente non trovato: " + idCreatore));
 
+        if (teamRepository.trovaPerMembro(creatore).isPresent()) {
+            throw new IllegalArgumentException(
+                    "L'utente " + creatore.getNome() + " appartiene gia' a un team");
+        }
+
         if (teamRepository.esisteConNome(nome)) {
             throw new IllegalArgumentException(
                     "Esiste gia' un team con il nome: " + nome);
         }
 
         Team team = new Team(nome, creatore);
-        return teamRepository.salva(team);
-    }
-
-    /**
-     * Aggiunge un utente a un team esistente.
-     * Il controllo sulla duplicazione dei membri e' delegato al Team.
-     */
-    public Team aggiungiMembro(UUID idTeam, UUID idUtente) {
-        Team team = teamRepository.trovaPerId(idTeam)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Team non trovato: " + idTeam));
-
-        Utente utente = utenteRepository.trovaPerId(idUtente)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Utente non trovato: " + idUtente));
-
-        team.aggiungiMembro(utente);
         return teamRepository.salva(team);
     }
 }
