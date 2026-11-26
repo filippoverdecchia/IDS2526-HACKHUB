@@ -44,8 +44,11 @@ public class DatiDiEsempio implements CommandLineRunner {
         Utente primoUtente = new Utente("luca@studenti.unicam.it", "password", "Luca Neri");
         Utente secondoUtente = new Utente("giulia@studenti.unicam.it", "password", "Giulia Blu");
 
+        Utente terzoUtente = new Utente("paolo@studenti.unicam.it", "password", "Paolo Gialli");
+
         utenteRepository.salva(primoUtente);
         utenteRepository.salva(secondoUtente);
+        utenteRepository.salva(terzoUtente);
 
         System.out.println();
         System.out.println("=== Identificativi di prova ===");
@@ -54,6 +57,7 @@ public class DatiDiEsempio implements CommandLineRunner {
         System.out.println("Mentore       : " + mentore.getId());
         System.out.println("Utente 1      : " + primoUtente.getId());
         System.out.println("Utente 2      : " + secondoUtente.getId());
+        System.out.println("Utente 3      : " + terzoUtente.getId());
         System.out.println();
     }
 }

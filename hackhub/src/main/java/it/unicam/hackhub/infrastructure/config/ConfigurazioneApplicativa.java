@@ -1,7 +1,9 @@
 package it.unicam.hackhub.infrastructure.config;
 
 import it.unicam.hackhub.application.hackathon.HackathonService;
+import it.unicam.hackhub.application.invito.InvitoService;
 import it.unicam.hackhub.application.port.HackathonRepository;
+import it.unicam.hackhub.application.port.InvitoRepository;
 import it.unicam.hackhub.application.port.StaffRepository;
 import it.unicam.hackhub.application.port.TeamRepository;
 import it.unicam.hackhub.application.port.UtenteRepository;
@@ -43,5 +45,12 @@ public class ConfigurazioneApplicativa {
                                                      TeamRepository teamRepository,
                                                      StaffRepository staffRepository) {
         return new SottomissioneService(hackathonRepository, teamRepository, staffRepository);
+    }
+
+    @Bean
+    public InvitoService invitoService(InvitoRepository invitoRepository,
+                                       TeamRepository teamRepository,
+                                       UtenteRepository utenteRepository) {
+        return new InvitoService(invitoRepository, teamRepository, utenteRepository);
     }
 }
