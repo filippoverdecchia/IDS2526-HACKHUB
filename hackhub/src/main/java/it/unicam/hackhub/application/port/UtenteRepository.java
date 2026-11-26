@@ -14,4 +14,7 @@ public interface UtenteRepository {
     Optional<Utente> trovaPerId(UUID id);
 
     List<Utente> trovaTutti();
+
+    /** Cerca un utente per email, senza distinguere maiuscole e minuscole. */
+    Optional<Utente> trovaPerEmail(String email);
 }

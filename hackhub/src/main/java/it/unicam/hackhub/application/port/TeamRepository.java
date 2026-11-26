@@ -1,5 +1,6 @@
 package it.unicam.hackhub.application.port;
 
+import it.unicam.hackhub.domain.staff.Utente;
 import it.unicam.hackhub.domain.team.Team;
 
 import java.util.List;
@@ -16,4 +17,10 @@ public interface TeamRepository {
     List<Team> trovaTutti();
 
     boolean esisteConNome(String nome);
+
+    /**
+     * Restituisce il team di cui l'utente fa parte, se esiste.
+     * Un utente appartiene al piu' a un team, quindi il risultato e' unico.
+     */
+    Optional<Team> trovaPerMembro(Utente utente);
 }
